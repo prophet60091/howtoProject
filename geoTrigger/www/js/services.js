@@ -10,5 +10,7 @@ angular.module('app.services', [])
 .service('GoogleAddress', [function(){
   this.clocFormattedAddress = null;
   this.address = null;
+  this.lat = null;
+  this.lng = null;
 }]);
 
