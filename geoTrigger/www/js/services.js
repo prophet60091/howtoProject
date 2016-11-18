@@ -8,9 +8,10 @@ angular.module('app.services', [])
 
 }])
 .service('GoogleAddress', [function(){
-  this.clocFormattedAddress = null;
+  this.currentLocation = null;
   this.address = null;
   this.lat = null;
   this.lng = null;
+  this.latLng = null;
 }]);
 
