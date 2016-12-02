@@ -1,9 +1,6 @@
 /* Empty. Add your own CSS if you like */
 #map {
-  width: 80%;
-  height: 80%;
-  background-color: #0a9dc7;
-  border: 1px solid black;
+
 }
 #location_results {
   padding: 1em 0;

@@ -1,0 +1,44 @@
+<ion-view title="Locations" id="page2">
+  <ion-content padding="true" class="has-header">
+    <form id="locations-form3" class="list">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="search" placeholder="type a location" ng-model="gPlacesAuto">
+      </label>
+    </form>
+    <div id="locations-button-bar2" class="button-bar">
+      <button id="locations-button6" class="button button-positive  button-block" ng-click="getCurLocation()">Get Current Location</button>
+    </div>
+    <div class="list card" id="locations-card21" ng-show="showLocation">
+      <div class="item item-body" id="locations-list-item-container4">
+        <div id="locations-markdown6" class="show-list-numbers-and-dots">
+          <h2>You are Here:</h2>
+          <p style="margin-top:0px;color:#000000;">
+            {{clocFormattedAddress}}
+          </p>
+        </div>
+      </div>
+      <ion-item class="item-icon-left balanced" id="locations-list-item14" ng-click="addLocation()">
+        <i class="icon ion-location"></i>Add Location</ion-item>
+    </div>
+    <div id="locations-button-bar1" class="button-bar">
+      <button id="locations-button5" class="button button-positive  button-block" ng-click="getLocations()">View All Locations</button>
+    </div>
+    <div class="item item-body" id="locations-list-item-container1" >
+      <div id="locations-markdown2" ng-repeat="loca in locations">
+        <div class="list card" ng-click="console.log('aetsch',id)" >
+          <p><strong>Name:</strong> {{loca.name}}</p>
+          <p><strong>Number: </strong>{{loca.address[0].number}}</p>
+          <p><strong>Street:</strong> {{loca.address[0].street}}</p>
+          <p><strong>City:</strong> {{loca.address[0].city}}</p>
+          <p><strong>State:</strong> {{loca.address[0].state}}</p>
+          <p><strong>Zip:</strong> {{loca.address[0].zip}}</p>
+          <ion-item class="item-icon-left assertive" id="locations-list-item15" ng-click="viewLocation()">
+            <i class="icon ion-location"></i>view Location</ion-item>
+          <ion-item class="item-icon-left assertive" id="locations-list-item16" ng-click="removeLocation()">
+            <i class="icon ion-android-delete"></i>remove Location</ion-item>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
