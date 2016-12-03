@@ -6,7 +6,7 @@ angular.module('app.controllers', ['restangular'])
 
     }])
 
-.controller('addTriggerCtrl', ['$scope', '$stateParams', '$state', '$ionicLoading', '$ionicPlatform', 'GoogleAddress',
+.controller('locationCtrl', ['$scope', '$stateParams', '$state', '$ionicLoading', '$ionicPlatform', 'GoogleAddress',
 
     function ($scope, $stateParams, $state, $ionicLoading, $ionicPlatform, GoogleAddress ) {
       var showLocation = false;
@@ -68,7 +68,7 @@ angular.module('app.controllers', ['restangular'])
        * Display a google map
        */
       $scope.displayMap = function() {
-
+        console.log("wtf", GoogleAddress.latLng);
         //Make sure we have a legit latitude longitude
         if(GoogleAddress.latLng != null ) {
           console.log("loading map..");
@@ -85,6 +85,21 @@ angular.module('app.controllers', ['restangular'])
             map: $scope.display.map,
             title: "You are/want to be here"
           });
+        }else if(GoogleAddress.address != null){
+
+          $scope.display.map = new google.maps.Map(document.getElementById('map'), {
+            center: GoogleAddress.Address.geometry.location,
+            zoom: 20,
+            mapTypeId: 'roadmap'
+          });
+
+          //set a marker
+          var marker = new google.maps.Marker({
+            position: GoogleAddress.Address.geometry.location,
+            map: $scope.display.map,
+            title: "You are/want to be here"
+          });
+
         }
         //we don't have it
         else{
@@ -132,11 +147,12 @@ angular.module('app.controllers', ['restangular'])
           var geocoder = new google.maps.Geocoder;
           geocoder.geocode({'placeId': placeId}, function(results, status) {
             if (status === 'OK') {
+              console.log("RESULTS:",results[0]);
               $scope.currentLocation = results[0].formatted_address;
               GoogleAddress.address = results[0];
               GoogleAddress.currentLocation = results[0].formatted_address;
               GoogleAddress.latLng = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
-              //console.log(results[0].geometry.location.lng());
+              console.log("GEoloc", results[0].geometry.location.lng(), GoogleAddress.latLng);
             }
             $scope.$apply();
           });
@@ -159,8 +175,9 @@ angular.module('app.controllers', ['restangular'])
 .controller('addLocationCtrl', ['$scope', '$stateParams', 'Location', 'GoogleAddress', '$location', '$ionicPopup', '$timeout',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 
   function ($scope, $stateParams, Location, GoogleAddress, $location, $ionicPopup, $timeout,  AuthService) {
-
+    console.log(GoogleAddress.address);
     $scope.failed = false;
+    //todo make sure this adds stuff in the right spots!
     if(GoogleAddress.address != null){
       var addy = GoogleAddress.address.address_components; // just to shorten it up
       var location = {};
@@ -176,7 +193,9 @@ angular.module('app.controllers', ['restangular'])
         address.unit = addy[2].long_name;
         address.city = addy[3].long_name;
         address.state = addy[5].long_name;
-        address.zip = addy[7].long_name + '-' + addy[8].long_name;
+        if(addy.length > 6) {
+          address.zip = addy[7].long_name + '-' + addy[8].long_name;
+        }
         $scope.clocFormattedAddress = GoogleAddress.clocFormattedAddress;
         location.address = address;
         $scope.location = location;
@@ -204,7 +223,7 @@ angular.module('app.controllers', ['restangular'])
      */
     $scope.saveLocation= function() {
       Location.post($scope.location).then(function(response) {
-        $location.path('/beers');
+        $location.path('/userLocations');
       },function(response){
 
         //we got a bad response - i.e. something what not filled out
@@ -217,8 +236,52 @@ angular.module('app.controllers', ['restangular'])
         }
       });
     };
+    /**
+     * Reset the current form to blank
+     */
+    $scope.resetForm = function() {
+      location.name = '';
+      location.type = '';
+      address.number = '';
+      address.street = '';
+      address.unit = '';
+      address.city = '';
+      address.state = '';
+      address.zip = '';
+      $scope.apply;
+      }
+
 
   }])
+
+.controller('userLocationsCtrl', ['$scope', '$stateParams', 'Location', 'GoogleAddress', '$location', '$ionicPopup', '$timeout',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+
+    function ($scope, $stateParams, Location, GoogleAddress, $location, $ionicPopup, $timeout,  AuthService) {
+
+      Location.getList().then(function(data) {
+        $scope.locations = data;
+
+      },function(response){
+        console.log("resp:" + response);
+      });
+      /**
+       * Reset the current form to blank
+       */
+      $scope.resetForm = function() {
+        location.name = '';
+        location.type = '';
+        address.number = '';
+        address.street = '';
+        address.unit = '';
+        address.city = '';
+        address.state = '';
+        address.zip = '';
+
+        $scope.apply;
+      }
+
+
+    }])
 
 .controller('beersCtrl', ['$scope', '$stateParams', 'Beer',
   function ($scope, $stateParams, Beer) {
@@ -241,7 +304,7 @@ angular.module('app.controllers', ['restangular'])
 
   $scope.login = function() {
     AuthService.login($scope.user).then(function(msg) {
-      $state.go('wall.addTrigger');
+      $state.go('location');
     }, function(errMsg) {
       var alertPopup = $ionicPopup.alert({
         title: 'Login failed!',

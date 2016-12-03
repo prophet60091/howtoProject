@@ -12,10 +12,10 @@ angular.module('app.routes', ['restangular'])
     abstract:true
   })
 
-  .state('addTrigger', {
-    url: '/addTrigger',
-    templateUrl: 'templates/addTrigger.html',
-    controller: 'addTriggerCtrl'
+  .state('location', {
+    url: '/location',
+    templateUrl: 'templates/location.html',
+    controller: 'locationCtrl'
   })
 
   .state('addLocation', {
@@ -25,12 +25,16 @@ angular.module('app.routes', ['restangular'])
     address:null,
     noClue: null
   })
-    .state('seeBeers', {
-      url: '/beer',
-      templateUrl: 'templates/beers.html',
-      controller: 'beersCtrl'
-    })
-
+  .state('userLocations', {
+    url: '/myLocations',
+    templateUrl: 'templates/userLocations.html',
+    controller: 'userLocationsCtrl'
+  })
+  .state('seeBeers', {
+    url: '/beer',
+    templateUrl: 'templates/beers.html',
+    controller: 'beersCtrl'
+  })
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
@@ -48,7 +52,7 @@ angular.module('app.routes', ['restangular'])
     });
 
 
-$urlRouterProvider.otherwise('/addTrigger')
+$urlRouterProvider.otherwise('/login')
 
 
 })

@@ -1,0 +1,23 @@
+<ion-view title="My Locations" id="page2">
+  <ion-content padding="true" class="has-header">
+    <div class="item item-body" id="locations-list-item-container1" >
+      <p ng-show="!locations.length">You have no stored Locations</p>
+      <button id="addTrigger-button11"ng-show="!locations.length" type="button" class="button button-positive button-block icon ion-android-locate" ui-sref="location">Add one Now</button>
+
+      <div id="locations-markdown2" ng-repeat="loca in locations">
+        <div class="list card" ng-click="console.log('aetsch',id)" >
+          <p><strong>Name:</strong> {{loca.name}}</p>
+          <p><strong>Number: </strong>{{loca.address[0].number}}</p>
+          <p><strong>Street:</strong> {{loca.address[0].street}}</p>
+          <p><strong>City:</strong> {{loca.address[0].city}}</p>
+          <p><strong>State:</strong> {{loca.address[0].state}}</p>
+          <p><strong>Zip:</strong> {{loca.address[0].zip}}</p>
+          <ion-item class="item-icon-left assertive" id="locations-list-item15" ng-click="viewLocation()">
+            <i class="icon ion-location"></i>view Location</ion-item>
+          <ion-item class="item-icon-left assertive" id="locations-list-item16" ng-click="removeLocation()">
+            <i class="icon ion-android-delete"></i>remove Location</ion-item>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

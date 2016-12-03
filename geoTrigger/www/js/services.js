@@ -31,6 +31,10 @@ angular.module('app.services', ['restangular'])
   .factory('Location', function(BeerRestangular){
     return BeerRestangular.service('location'); // The actual api resource from whence it pulls
   })
+  //get My Loactions
+  .factory('MyLocations', function(BeerRestangular){
+    return BeerRestangular.service('mylocations'); // The actual api resource from whence it pulls
+  })
   .factory('Login', function(BeerRestangular){
     return BeerRestangular.service(''); // The actual api resource from whence it pulls
   })
