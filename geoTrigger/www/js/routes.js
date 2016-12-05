@@ -13,6 +13,7 @@ angular.module('app.routes', ['restangular'])
     abstract:true
   })
   .state('location', {
+    cache: false,
     url: '/location',
     templateUrl: 'templates/location.html',
     controller: 'locationCtrl'
@@ -25,21 +26,25 @@ angular.module('app.routes', ['restangular'])
     noClue: null
   })
   .state('myLocations', {
+    cache: false,
     url: '/myLocations',
     templateUrl: 'templates/userLocations.html',
     controller: 'userLocationsCtrl'
   })
   .state('viewLocation/:id', {
+    cache: false,
     url: '/viewLocation/:id',
     templateUrl: 'templates/viewLocation.html',
     controller: 'viewLocationCtrl'
   })
   .state('seeBeers', {
+    cache: false,
     url: '/beer',
     templateUrl: 'templates/beers.html',
     controller: 'beersCtrl'
   })
   .state('myBeers', {
+    cache: false,
     url: '/myBeers',
     templateUrl: 'templates/myBeers.html',
     controller: 'userBeerCtrl'
@@ -47,9 +52,10 @@ angular.module('app.routes', ['restangular'])
   .state('addBeer', {
     url: '/create/beer/',
     templateUrl: 'templates/addBeer.html',
-    controller: 'addBeerCtrl',
+    controller: 'addBeerCtrl'
   })
   .state('viewBeers/:id', {
+    cache: false,
     url: '/viewBeer/:id',
     templateUrl: 'templates/viewBeer.html',
     controller: 'viewBeerCtrl'

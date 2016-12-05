@@ -1,6 +1,6 @@
 <ion-view title="Beers" id="page3">
 
-  <ion-content padding="true" class="has-header">
+  <ion-content padding="true" class="has-header" ng-controller="viewBeerCtrl">
     <p ng-show="mybeer.length == 0">Server Returned no Data</p>
     <button id="addTrigger-button12"ng-show="mybeer.length == 0" type="button" class="button button-calm button-block icon ion-android-arrow-back" ui-sref="myBeers">Go Back</button>
     <form role="form" class="list" name="myform">

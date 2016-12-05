@@ -131,7 +131,7 @@ angular.module('app.services', ['restangular'])
       console.log("removing ", obj._id);
 
       Location.one(obj._id).remove().then(function (response) {
-        $location.path('/myLocations');
+
 
       }, function (response) {
 
@@ -140,6 +140,7 @@ angular.module('app.services', ['restangular'])
           //do some stuff with it like yell at the user for sending you shit data
 
         }
+        next();
       });
     };
 
@@ -163,9 +164,9 @@ angular.module('app.services', ['restangular'])
   .service('BeerManipulators', function(Beer, $location) {
 
     this.addToCollection = function (obj) {
-      console.log("adding ", obj._id);
+      console.log("adding ", obj);
 
-      obj.save().then(function (response) {
+      obj.put().then(function (response) {
         $location.path('/myBeers');
 
       }, function (response) {

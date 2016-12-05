@@ -1,17 +1,27 @@
 <ion-view title="Add Beer" id="page2">
   <ion-content padding="true" class="has-header" >
-    <form role="form" class="list" name="myform">
+    <form role="form" class="list" name="myform" ng-controller="addBeerCtrl">
       <div class="form-group">
         <label for="name" class="control-label">Name</label>
         <input type="text" ng-model="beer.name" class="form-control" id="name" placeholder="Enter the beer's name" required/>
-      </div
+      </div>
       <div class="form-group">
-        <label for="name" class="control-label">Description</label>
-        <input type="text" ng-model="beer.description" class="form-control" id="description" placeholder="Enter the beer's description" required/>
+        <label for="description" class="control-label">Description</label>
+        <input type="text" ng-model="beer.description" class="form-control" id="description" placeholder="Enter the beer's description" />
       </div>
       <div class="form-group">
         <label for="alcohol_content" class="control-label">Alcohol Content</label>
         <input type="number" ng-model="beer.alcohol_content" class="form-control" id="alcohol_content" placeholder="Enter the beer's %" />
+      </div>
+      <div class="form-group">
+        <label class="control-label">Do you love this beer?</label>
+        <label for="love" class="control-label">
+          yes<input type="radio" ng-model="beer.loved" class="radio" id="love" ng-value="true"  />
+        </label>
+
+        <label for="nolove" class="control-label">
+          no<input type="radio" ng-model="beer.loved" class="radio" id="nolove" ng-value="false"/>
+        </label>
       </div>
 
       <button type="button" class="button button-balanced  button-block"  ng-click="saveBeer(beer)">Add</button>

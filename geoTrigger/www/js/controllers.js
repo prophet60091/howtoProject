@@ -228,7 +228,7 @@ angular.module('app.controllers', ['restangular'])
     $scope.saveLocation= function() {
       Location.post($scope.location).then(function(response) {
         $location.path('/myLocations');
-        $scope.$apply();
+
 
       },function(response){
 
@@ -247,15 +247,8 @@ angular.module('app.controllers', ['restangular'])
      * Reset the current form to blank
      */
     $scope.resetForm = function() {
-      location.name = '';
-      location.type = '';
-      address.number = '';
-      address.street = '';
-      address.unit = '';
-      address.city = '';
-      address.state = '';
-      address.zip = '';
-      $scope.apply;
+      location = '';
+      $scope.$apply();
       }
 
 
@@ -278,7 +271,14 @@ angular.module('app.controllers', ['restangular'])
       $scope.removeLocation = function(location){
         console.log(location);
         LocationManipulators.removeit(location);
+        MyLocations.getList().then(function(data) {
 
+          $scope.mylocations = data;
+          console.log("data", data)
+
+        },function(response){
+          console.log("resp:" + response);
+        });
       };
 
       $scope.viewLocation = function(location){
@@ -291,16 +291,8 @@ angular.module('app.controllers', ['restangular'])
        * Reset the current form to blank
        */
       $scope.resetForm = function() {
-        location.name = '';
-        location.type = '';
-        address.number = '';
-        address.street = '';
-        address.unit = '';
-        address.city = '';
-        address.state = '';
-        address.zip = '';
+        location = '';
 
-        $scope.apply();
       }
 
 
@@ -396,9 +388,9 @@ angular.module('app.controllers', ['restangular'])
     }
 
   }])
-.controller('addBeerCtrl', ['$scope', '$stateParams', 'Beer', '$location', '$ionicPopup',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+.controller('addBeerCtrl', ['$scope', '$stateParams', 'Beer', '$location', '$ionicPopup','MyBeers',// The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 
-    function ($scope, $stateParams, Beer, $location, $ionicPopup) {
+    function ($scope, $stateParams, Beer, $location, $ionicPopup, MyBeers) {
 
       /**
        * Alert Popup
@@ -416,7 +408,7 @@ angular.module('app.controllers', ['restangular'])
           console.log('fail');
         });
       };
-      $scope.beer= null;
+
       // Save a beer
       $scope.saveBeer = function() {
         Beer.post($scope.beer).then(function(response) {
@@ -449,11 +441,10 @@ angular.module('app.controllers', ['restangular'])
     $scope.listCanSwipe = true;
     $scope.shouldShowDelete = false;
     $scope.mybeers = null;
-    console.log('used the right controller');
-    data = null;
+
     //get the list of locations
     MyBeers.getList().then(function(data) {
-
+      $scope.mybeers = null;
       $scope.mybeers = data;
       console.log("data", data)
 
@@ -462,10 +453,11 @@ angular.module('app.controllers', ['restangular'])
     });
 
     $scope.doRefresh = function() {
+      $scope.mybeers = null;
       MyBeers.getList().then(function(data) {
 
         $scope.mybeers = data;
-        console.log("data", data)
+        console.log("data", data);
 
       }).finally(function() {
           // Stop the ion-refresher from spinning
@@ -536,7 +528,7 @@ angular.module('app.controllers', ['restangular'])
 
   $scope.login = function() {
     AuthService.login($scope.user).then(function(msg) {
-      $state.go('myLocations');
+      $state.go('wall');
     }, function(errMsg) {
       var alertPopup = $ionicPopup.alert({
         title: 'Login failed!',
@@ -565,16 +557,6 @@ angular.module('app.controllers', ['restangular'])
         template: errMsg
       });
     });
-  };
-})
-.controller('WallCtrl', function($scope, AuthService, $http, $state) {
-  $scope.destroySession = function() {
-    AuthService.logout();
-  };
-
-  $scope.logout = function() {
-    AuthService.logout();
-    $state.go('login');
   };
 })
 .controller('WallCtrl', function($scope, AuthService, $http, $state) {

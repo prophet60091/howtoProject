@@ -1,15 +1,12 @@
 <ion-view title="My Locations" id="page2">
   <ion-content padding="true" class="has-header">
-    <ion-refresher
-      pulling-text="Pull to refresh..."
-      on-refresh="doRefresh()">
-    </ion-refresher>
+
     <div class="item item-body" id="locations-list-item-container1" >
       <p ng-show="!mylocations.length">You have no stored Locations</p>
       <button id="addTrigger-button11" ng-show="!mylocations.length" type="button" class="button button-positive button-block icon ion-android-locate" ui-sref="location">Add one Now</button>
 
       <div id="locations-markdown2" ng-repeat="loca in mylocations">
-        <div class="list card" ng-click="viewLocation(loca._id)" >
+        <div class="list card"  >
           <p><strong>Name:</strong> {{loca.name}}</p>
           <p><strong>Type: </strong>{{loca.locationtype}}</p>
           <p><strong>Number: </strong>{{loca.address[0].number}}</p>

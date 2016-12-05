@@ -1,5 +1,5 @@
 <ion-view title="Location" id="page6">
-    <ion-content padding="true" class="has-header">
+    <ion-content padding="true" class="has-header" ng-controller="locationCtrl">
     <button id="addTrigger-button11" type="button" class="button button-positive  button-block icon ion-android-locate" on-tap="getCurLocation()"> Get Current Location</button>
     <div id="location_results" class="creator-container" ng-show="showLocation" >
       <h4>You are here:</h4><p>{{display.currentLocation}}</p>

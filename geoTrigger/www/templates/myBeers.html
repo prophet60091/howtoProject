@@ -14,15 +14,17 @@
                 show-delete="shouldShowDelete">
         <ion-item ng-repeat="beer in mybeers" class="ïtem-thumbnail-left">
           <div ng-if="beer.loved == true">
+            <a class="item item-avatar" href="#">
             <img src="../img/love-my-beer1.png" >
+              </a>
           </div>
           <div ng-if="beer.loved == false">
+            <a class="item item-avatar" href="#">
             <img src="../img/No_Alcohol.gif"  >
+            </a>
           </div>
-          <p>Name:{{beer.name}}
-          Description: {{beer.description}}
-          Alcohol Content:{{beer.alcohol_content}} IBU:{{beer.ibu}}
-         </p>
+          <p>Name:{{beer.name}}</p>
+          <p>Description: {{beer.description}}</p>
 
           <ion-option-button class="button-balanced icon ion-edit"
                              ng-click="viewBeer(beer)">

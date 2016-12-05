@@ -10,11 +10,11 @@
           <div ng-if="beer.loved == false">
             <img src="../img/No_Alcohol.gif"  >
           </div>
-          <p>Name:{{beer.name}}
-            <span>Description: {{beer.description}}</span>
-            <span>Alcohol Content:{{beer.alcohol_content}}</span>
-            <span>IBU:{{beer.ibu}}</span>
-         </p>
+          <p>Name:{{beer.name}}</p>
+            <p>Description: {{beer.description}}</p>
+            <p>Alcohol Content:{{beer.alcohol_content}}</p>
+            <p>IBU:{{beer.ibu}}</p>
+
 
           <ion-option-button class="button-positive"
                              ng-click="addToCollection(beer)">
