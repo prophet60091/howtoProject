@@ -3,21 +3,20 @@ angular.module('app.routes', ['restangular'])
 .config(function($stateProvider, $urlRouterProvider, RestangularProvider) {
 
   RestangularProvider.setBaseUrl('http://54.244.107.56');
+  RestangularProvider.setDefaultHttpFields({cache: false});
 
   $stateProvider
 
-      .state('tabsController', {
+  .state('tabsController', {
     url: '/page1',
     templateUrl: 'templates/tabsController.html',
     abstract:true
   })
-
   .state('location', {
     url: '/location',
     templateUrl: 'templates/location.html',
     controller: 'locationCtrl'
   })
-
   .state('addLocation', {
     url: '/create/location/:address/{noClue}',
     templateUrl: 'templates/addLocation.html',
@@ -25,31 +24,56 @@ angular.module('app.routes', ['restangular'])
     address:null,
     noClue: null
   })
-  .state('userLocations', {
+  .state('myLocations', {
     url: '/myLocations',
     templateUrl: 'templates/userLocations.html',
     controller: 'userLocationsCtrl'
+  })
+  .state('viewLocation/:id', {
+    url: '/viewLocation/:id',
+    templateUrl: 'templates/viewLocation.html',
+    controller: 'viewLocationCtrl'
   })
   .state('seeBeers', {
     url: '/beer',
     templateUrl: 'templates/beers.html',
     controller: 'beersCtrl'
   })
+  .state('myBeers', {
+    url: '/myBeers',
+    templateUrl: 'templates/myBeers.html',
+    controller: 'userBeerCtrl'
+  })
+  .state('addBeer', {
+    url: '/create/beer/',
+    templateUrl: 'templates/addBeer.html',
+    controller: 'addBeerCtrl',
+  })
+  .state('viewBeers/:id', {
+    url: '/viewBeer/:id',
+    templateUrl: 'templates/viewBeer.html',
+    controller: 'viewBeerCtrl'
+  })
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
     controller: 'LoginCtrl'
+  })
+  .state('logout', {
+    url: '/logout',
+    templateUrl: 'templates/logout.html',
+    controller: 'logoutCtrl'
   })
   .state('register', {
     url: '/register',
     templateUrl: 'templates/register.html',
     controller: 'RegisterCtrl'
   })
-    .state('wall', {
-      url: '/wall',
-      templateUrl: 'templates/wall.html',
-      controller: 'WallCtrl'
-    });
+  .state('wall', {
+    url: '/wall',
+    templateUrl: 'templates/wall.html',
+    controller: 'WallCtrl'
+  });
 
 
 $urlRouterProvider.otherwise('/login')

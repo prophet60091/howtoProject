@@ -1,16 +1,7 @@
-<ion-view title="Beers" id="page3">
-  <ion-nav-buttons side=left" class="has-header">
-    <button class="button icon ion-android-arrow-back"> back</button>
-  </ion-nav-buttons>
-
+<ion-view title="Beers" >
   <ion-content padding="true" class="has-header">
-    <div id="beers-container1">
-      <p>Add some Beers, eh!.</p>
-      <a class="button button-balanced  button-block" href="/create/beer"><span class="glyphicon glyphicon-plus"></span> Create Beer</a>
-    </div>
     <div id="beers-container2">
       <ion-list ng-controller="beersCtrl"
-                show-delete="shouldShowDelete"
                 can-swipe="listCanSwipe">
         <ion-item ng-repeat="beer in beers" class="ïtem-thumbnail-left">
           <div ng-if="beer.loved == true">
@@ -20,24 +11,15 @@
             <img src="../img/No_Alcohol.gif"  >
           </div>
           <p>Name:{{beer.name}}
-          Description: {{beer.description}}
-          Alcohol Content:{{beer.alcohol_content}} IBU:{{beer.ibu}}
+            <span>Description: {{beer.description}}</span>
+            <span>Alcohol Content:{{beer.alcohol_content}}</span>
+            <span>IBU:{{beer.ibu}}</span>
          </p>
 
           <ion-option-button class="button-positive"
-                             ng-click="share(beer)">
-            Share
+                             ng-click="addToCollection(beer)">
+            Add this to my collection
           </ion-option-button>
-          <ion-option-button class="button-info"
-                             ng-click="edit(beer)">
-            Edit
-          </ion-option-button>
-          <ion-delete-button class="ion-minus-circled"
-                             ng-click="beers.splice($index, 1)">
-          </ion-delete-button>
-          <ion-reorder-button class="ion-navicon"
-                              on-reorder="reorderItem(beer, $fromIndex, $toIndex)">
-          </ion-reorder-button>
 
         </ion-item>
       </ion-list>

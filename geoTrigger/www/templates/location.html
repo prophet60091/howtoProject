@@ -1,11 +1,8 @@
 <ion-view title="Location" id="page6">
-  <ion-nav-buttons side="left" class="has-header">
-    <button class="button icon ion-android-arrow-back"> back</button>
-  </ion-nav-buttons>  <ion-content padding="true" class="has-header">
+    <ion-content padding="true" class="has-header">
     <button id="addTrigger-button11" type="button" class="button button-positive  button-block icon ion-android-locate" on-tap="getCurLocation()"> Get Current Location</button>
     <div id="location_results" class="creator-container" ng-show="showLocation" >
       <h4>You are here:</h4><p>{{display.currentLocation}}</p>
-
     </div>
 
     <form id="addTrigger-form14" class="list">

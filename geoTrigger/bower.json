@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "angular-google-maps": "^2.4.0",
-    "lodash": "^4.17.2"
+    "lodash": "^4.17.2",
+    "restangular": "^1.5.2"
   }
 }

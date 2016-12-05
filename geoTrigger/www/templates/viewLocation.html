@@ -1,0 +1,53 @@
+<ion-view title="Edit Location" id="page2">
+  <ion-content padding="true" class="has-header">
+    <p ng-show="mylocation.length == 0">Server Returned no Data</p>
+    <button id="addTrigger-button11"ng-show="mylocation.length == 0" type="button" class="button button-positive button-block icon ion-android-locate" ui-sref="location">Add one Now</button>
+    <button id="addTrigger-button12"ng-show="mylocation.length == 0" type="button" class="button button-calm button-block icon ion-android-arrow-back" ui-sref="myLocations">Go Back</button>
+    <form id="addLocation-form7" class="list" name="myform">
+
+      <div class="spacer" style="width: 300px; height: 47px;"></div>
+      <label class="item item-input" id="form-name" for="name">
+        <span class="input-label">name</span>
+        <input type="text" placeholder="The name of the location" id="name" ng-model="mylocation.name" required>
+      </label>
+      <div ng-if="failed" class="alert" >Bad Information! {{failMessage}} or is too long</div>
+      <label class="item item-select" id="form-type" for="type">
+        <span class="input-label">What kind of place is it?</span>
+        <select ng-model="mylocation.locationtype" id="type" required>
+          <option>Brewery</option>
+          <option >Restaurant</option>
+          <option  >Liquor Store</option>
+          <option >Friend's basement...</option>
+        </select>
+      </label>
+      <label class="item item-input" id="form-number" for="number">
+        <span class="input-label">Number</span>
+        <input type="text" placeholder="Enter the address number" id="number" ng-model="mylocation.address[0].number">
+      </label>
+      <label class="item item-input" id="form-street" for="street">
+        <span class="input-label">Street</span>
+        <input type="text" placeholder="Enter the street name" id="street" ng-model="mylocation.address[0].street">
+      </label>
+      <label class="item item-input" id="form-unit" for="unit">
+        <span class="input-label">Unit</span>
+        <input type="text" placeholder="Enter the Apartment, Suite, etc" id="unit" ng-model="mylocation.address[0].unit">
+      </label>
+      <label class="item item-input" id="form-city" for="city">
+        <span class="input-label">City</span>
+        <input type="text" placeholder="Enter the City" id="city" ng-model="mylocation.address[0].city">
+      </label>
+      <label class="item item-input" id="form-state" for="state">
+        <span class="input-label">State</span>
+        <input type="text" placeholder="Enter the State" id="state" ng-model="mylocation.address[0].state">
+      </label>
+      <label class="item item-input" id="form-zip" for="zip">
+        <span class="input-label">Zip</span>
+        <input type="text" placeholder="Enter the Zip Code" id="zip" ng-model="mylocation.address[0].zip">
+      </label>
+    </form>
+    <div id="addLocation-button-bar3" class="button-bar">
+      <button id="addLocation-button13" class="button button-balanced  button-block" ng-click="editLocation(mylocation)"  value="Save">Change</button>
+      <button id="addLocation-button15" class="button button-dark  button-block" ng-click="resetForm()">Reset</button>
+    </div>
+  </ion-content>
+</ion-view>

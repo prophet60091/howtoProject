@@ -1,0 +1,37 @@
+<ion-view title="Beers" id="page3">
+
+  <ion-content padding="true" class="has-header">
+    <p ng-show="mybeer.length == 0">Server Returned no Data</p>
+    <button id="addTrigger-button12"ng-show="mybeer.length == 0" type="button" class="button button-calm button-block icon ion-android-arrow-back" ui-sref="myBeers">Go Back</button>
+    <form role="form" class="list" name="myform">
+      <div class="form-group">
+        <label for="name" class="control-label">Name</label>
+        <input type="text" ng-model="mybeer.name" class="form-control" id="name" placeholder="Enter the beer's name" required/>
+      </div>
+      <div class="form-group">
+        <label for="name" class="control-label">Description</label>
+        <input type="text" ng-model="mybeer.description" class="form-control" id="description" placeholder="Enter the beer's description" required/>
+      </div>
+      <div class="form-group">
+        <label for="alcohol_content" class="control-label">Alcohol Content</label>
+        <input type="number" ng-model="mybeer.alcohol_content" class="form-control" id="alcohol_content" placeholder="Enter the beer's %" />
+      </div>
+
+      <div class="form-group">
+        <label class="control-label">Do you love this beer?</label>
+        <label for="love" class="control-label">
+          yes<input type="radio" ng-model="mybeer.loved" class="radio" id="love" ng-value="true"  />
+        </label>
+
+        <label for="nolove" class="control-label">
+          no<input type="radio" ng-model="mybeer.loved" class="radio" id="nolove" ng-value="false"/>
+        </label>
+      </div>
+      <div id="addLocation-button-bar3" class="button-bar">
+        <button id="addLocation-button13" class="button button-balanced  button-block" ng-click="saveBeer(mybeer)"  value="Save">Change</button>
+        <button id="addLocation-button15" class="button button-dark  button-block" ng-click="resetForm()">Reset</button>
+      </div>
+    </form>
+  </ion-content>
+</ion-view>
+

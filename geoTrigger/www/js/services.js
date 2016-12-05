@@ -27,17 +27,20 @@ angular.module('app.services', ['restangular'])
   .factory('Beer', function(BeerRestangular){
     return BeerRestangular.service('beer'); // The actual api resource from whence it pulls
   })
-  //get Loactions
+  .factory('MyBeers', function(BeerRestangular){
+    return BeerRestangular.service('mybeers'); // The actual api resource from whence it pulls
+  })
+  //get Locations
   .factory('Location', function(BeerRestangular){
     return BeerRestangular.service('location'); // The actual api resource from whence it pulls
   })
-  //get My Loactions
+  //get My Locations
   .factory('MyLocations', function(BeerRestangular){
     return BeerRestangular.service('mylocations'); // The actual api resource from whence it pulls
   })
-  .factory('Login', function(BeerRestangular){
-    return BeerRestangular.service(''); // The actual api resource from whence it pulls
-  })
+  // .factory('Login', function(BeerRestangular){
+  //   return BeerRestangular.service(''); // The actual api resource from whence it pulls
+  // })
   //Credit to http://devdactic.com/restful-api-user-authentication-2/
 
   //the Authorization Services for JWT based authentication
@@ -108,7 +111,7 @@ angular.module('app.services', ['restangular'])
       login: login,
       register: register,
       logout: logout,
-      isAuthenticated: function() {return isAuthenticated;},
+      isAuthenticated: function() {return isAuthenticated;}
     };
   })
 
@@ -116,13 +119,98 @@ angular.module('app.services', ['restangular'])
     return {
       responseError: function (response) {
         $rootScope.$broadcast({
-          401: AUTH_EVENTS.notAuthenticated,
+          401: AUTH_EVENTS.notAuthenticated
         }[response.status], response);
         return $q.reject(response);
       }
     };
   })
+  .service('LocationManipulators', function(Location, $location) {
 
+    this.removeit = function (obj) {
+      console.log("removing ", obj._id);
+
+      Location.one(obj._id).remove().then(function (response) {
+        $location.path('/myLocations');
+
+      }, function (response) {
+
+        //we got a bad response - i.e. something what not filled out
+        if (response.status == 400) {
+          //do some stuff with it like yell at the user for sending you shit data
+
+        }
+      });
+    };
+
+    this.edit = function (obj) {
+      obj.put().then(function(response) {
+        $location.path('/myLocations');
+
+        console.log("data to be edited", obj)
+
+      }, function (response) {
+
+        //we got a bad response - i.e. something what not filled out
+        if (response.status == 400) {
+          //do some stuff with it like yell at the user for sending you shit data
+
+        }
+      });
+
+    };
+  })
+  .service('BeerManipulators', function(Beer, $location) {
+
+    this.addToCollection = function (obj) {
+      console.log("adding ", obj._id);
+
+      obj.save().then(function (response) {
+        $location.path('/myBeers');
+
+      }, function (response) {
+
+        //we got a bad response - i.e. something what not filled out
+        if (response.status == 400) {
+          //do some stuff with it like yell at the user for sending you shit data
+
+        }
+      });
+    };
+
+    this.removeit = function (obj) {
+      console.log("removing ", obj._id);
+
+      Beer.one(obj._id).remove().then(function (response) {
+        $location.path('/myBeers');
+
+      }, function (response) {
+
+        //we got a bad response - i.e. something what not filled out
+        if (response.status == 400) {
+          //do some stuff with it like yell at the user for sending you shit data
+
+        }
+        if (response.status == 404) {
+          //do some stuff with it like yell at the user for sending you shit data
+          console.log('all is well');
+        }
+      });
+    };
+    this.edit = function (obj) {
+      obj.put().then(function(response) {
+        $location.path('/myBeers');
+
+      }, function (response) {
+
+        //we got a bad response - i.e. something what not filled out
+        if (response.status == 400) {
+          //do some stuff with it like yell at the user for sending you shit data
+
+        }
+      });
+    };
+  })
   .config(function ($httpProvider) {
     $httpProvider.interceptors.push('AuthInterceptor');
   });

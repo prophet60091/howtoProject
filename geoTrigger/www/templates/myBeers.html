@@ -1,0 +1,41 @@
+<ion-view title="Beers" >
+  <ion-content padding="true" class="has-header">
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
+    <div id="beers-container1">
+      <p>Add some Beers, eh!.</p>
+      <a class="button button-balanced  button-block" ui-sref="addBeer"><span class="glyphicon glyphicon-plus"></span> Create Beer</a>
+    </div>
+    <div id="beers-container2">
+      <ion-list ng-controller="userBeerCtrl"
+                can-swipe="listCanSwipe"
+                show-delete="shouldShowDelete">
+        <ion-item ng-repeat="beer in mybeers" class="ïtem-thumbnail-left">
+          <div ng-if="beer.loved == true">
+            <img src="../img/love-my-beer1.png" >
+          </div>
+          <div ng-if="beer.loved == false">
+            <img src="../img/No_Alcohol.gif"  >
+          </div>
+          <p>Name:{{beer.name}}
+          Description: {{beer.description}}
+          Alcohol Content:{{beer.alcohol_content}} IBU:{{beer.ibu}}
+         </p>
+
+          <ion-option-button class="button-balanced icon ion-edit"
+                             ng-click="viewBeer(beer)">
+            Edit
+          </ion-option-button>
+          <ion-option-button class="button-assertive icon ion-android-delete"
+                             ng-click="removeBeer(beer)">
+            Remove
+          </ion-option-button>
+
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+</ion-view>
+

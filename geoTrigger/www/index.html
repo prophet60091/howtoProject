@@ -75,30 +75,31 @@
   </head>
   <body ng-app="app" animation="slide-left-right-ios7">
   <div>
-  <ion-side-menus enable-menu-with-back-views="false" data-componentid="side-menu21">
-    <ion-side-menu-content>
-      <ion-nav-bar class="bar-stable">
-        <ion-nav-back-button></ion-nav-back-button>
-        <ion-nav-buttons side="left">
-          <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
-        </ion-nav-buttons>
-      </ion-nav-bar>
-      <ion-nav-view></ion-nav-view>
-    </ion-side-menu-content>
-    <ion-side-menu side="left" id="side-menu21">
-      <ion-header-bar class="bar-stable">
-        <div class="title">Menu</div>
-      </ion-header-bar>
-      <ion-content ng-controller="menuCtrl" padding="false" class="side-menu-left has-header ">
-        <ion-list id="menu-list1" data-componentid="list1">
-          <ion-item id="menu-list-item1" ui-sref="wall" menu-close="" data-componentid="list-item1" ng-if="!loadUserCredientials()">Login</ion-item>
-          <ion-item id="menu-list-item6" ui-sref="wall" menu-close="" data-componentid="list-item1" ng-if="loadUserCredientials()">Logout</ion-item>
-          <ion-item id="menu-list-item2" ui-sref="location" data-componentid="list-item2" on-tap="/location">Add Locations</ion-item>
-          <ion-item id="menu-list-item3" ui-sref="userLocations" data-componentid="list-item3" on-tap="/myLocations">My Locations</ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-side-menu>
-  </ion-side-menus>
+    <ion-side-menus enable-menu-with-back-views="false" data-componentid="side-menu21">
+      <ion-side-menu-content>
+        <ion-nav-bar class="bar-stable">
+          <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+          </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view></ion-nav-view>
+      </ion-side-menu-content>
+      <ion-side-menu side="left" id="side-menu21">
+        <ion-header-bar class="bar-stable">
+          <div class="title">Menu</div>
+        </ion-header-bar>
+        <ion-content ng-controller="menuCtrl" padding="false" class="side-menu-left has-header ">
+          <ion-list id="menu-list1" data-componentid="list1">
+            <ion-item id="menu-list-item1" ui-sref="wall" menu-close="" data-componentid="list-item1" ng-if="AuthService.isAuthenticated()">Login</ion-item>
+            <ion-item id="menu-list-item2" ui-sref="logout" menu-close="" data-componentid="list-item2" ng-if="!AuthService.isAuthenticated()">Logout</ion-item>
+            <ion-item id="menu-list-item3" ui-sref="seeBeers" data-componentid="list-item3" >Beer Database</ion-item>
+            <ion-item id="menu-list-item4" ui-sref="myBeers" data-componentid="list-item4" >My Beers</ion-item>
+            <ion-item id="menu-list-item5" ui-sref="location" data-componentid="list-item5" >Add Locations</ion-item>
+            <ion-item id="menu-list-item6" ui-sref="myLocations" data-componentid="list-item6">My Locations</ion-item>
+          </ion-list>
+        </ion-content>
+      </ion-side-menu>
+    </ion-side-menus>
 </div>
   </body>
 </html>
